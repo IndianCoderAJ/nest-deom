@@ -14,6 +14,10 @@ export class ProductService {
     return 'This action adds a new product';
   }
 
+  getToken(){
+    return this.jwtService.sign({name:"Akshay",city:"AMT"})
+  }
+
   findAll() {
     return [
       {name:"Product 1",price:20},{name:"Product 2",price:30}

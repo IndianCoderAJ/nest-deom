@@ -2,6 +2,8 @@ import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { ProductService } from './product.service';
 import { CreateProductInput } from './dto/create-product.input';
 import { UpdateProductInput } from './dto/update-product.input';
+import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Resolver('Product')
 export class ProductResolver {
@@ -11,10 +13,16 @@ export class ProductResolver {
   create(@Args('createProductInput') createProductInput: CreateProductInput) {
     return this.productService.create(createProductInput);
   }
-
+  
+  @UseGuards(GqlAuthGuard)
   @Query('getAllProducts')
   findAll() {
     return this.productService.findAll();
+  }
+
+  @Query('getToken')
+  getTokenFun(){
+    return this.productService.getToken();
   }
 
   @Query('product')

@@ -13,6 +13,7 @@ input UpdateProductInput {
 }
 
 type Query {
+  getToken:String
   product: [Product]!
   getAllProducts: [Product]
 }
